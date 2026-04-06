@@ -1,4 +1,4 @@
-name: Build Linux GUI App
+name: Build Linux GUI App (No SDK Needed Locally)
 
 on:
   push:
@@ -24,6 +24,14 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y libgl1-mesa-dev xorg-dev
+
+      - name: Create go.mod automatically
+        run: |
+          if [ ! -f go.mod ]; then
+            echo "go.mod not found. Creating..."
+            go mod init gh-account-cloner
+          fi
+          go mod tidy
 
       - name: Build Linux binary
         run: |
