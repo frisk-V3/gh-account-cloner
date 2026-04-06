@@ -13,10 +13,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: "1.22"
 
@@ -29,8 +29,9 @@ jobs:
         run: |
           go build -o gh-account-cloner-gui ./cmd/gui
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload artifact (Linux binary)
+        uses: actions/upload-artifact@v4
         with:
           name: gh-account-cloner-linux
           path: gh-account-cloner-gui
+          retention-days: 7
