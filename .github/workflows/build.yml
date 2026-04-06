@@ -1,0 +1,36 @@
+name: Build Linux GUI App
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.22"
+
+      - name: Install Linux GUI dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libgl1-mesa-dev xorg-dev
+
+      - name: Build Linux binary
+        run: |
+          go build -o gh-account-cloner-gui ./cmd/gui
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: gh-account-cloner-linux
+          path: gh-account-cloner-gui
