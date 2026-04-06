@@ -2,8 +2,6 @@ package main
 
 import (
     "fmt"
-    "log"
-    "os"
     "strings"
 
     "gh-account-cloner/internal/github"
