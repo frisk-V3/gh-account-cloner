@@ -1,4 +1,4 @@
-name: Build Linux GUI App (No SDK Needed Locally)
+name: CI/CD
 
 on:
   push:
